@@ -1,5 +1,8 @@
 use num::complex::Complex;
 
+use std::ops::{Add};
+use std::time::{Duration};
+
 mod safe_rust;
 
 
@@ -25,8 +28,26 @@ fn main() {
     let mandelbrot = calculate_mandelbrot(1000, -2.0, 1.0, -1.0, 1.0, 100, 24);
     render_mandelbrot(mandelbrot);
     print!(">>>>>>>>>\n");
+    call_add();
+    print!(">>>>>>>>>\n");
 }
 
+fn call_add(){
+    let floats = generic_add(1.1, 2.1);
+    let ints = generic_add(10, 20);
+    let durations = generic_add(
+        Duration::new(20, 0),
+        Duration::new(20, 0)
+    );
+
+    println!("Floats: {}", floats);
+    println!("Ints: {}", ints);
+    println!("Durations: {:?}", durations);
+}
+
+fn generic_add<T: Add<Output = T>>(a: T, b: T) -> T{
+    a + b
+}
 
 fn is_even(n: i8) -> bool {
     n % 2 == 0
